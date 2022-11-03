@@ -1,17 +1,11 @@
 import { useEffect } from "react"
 import { useState } from "react"
 import ReviewCard from "./ReviewCard"
-const Reviews = () => {
+const Reviews = (props) => {
+ const {reviewData, setReviewData} = props
 
-const [reviewData, setReviewData] = useState([])
 let count = 0
-useEffect(() => {
-    fetch("https://obsoknotty-project.herokuapp.com/api/reviews").then((data) => {
-        return data.json()
-    }).then(({reviews})=> {
-        setReviewData(reviews)
-    })
-}, [])
+
 return(
     <div>
         <h2>Reviews</h2>
