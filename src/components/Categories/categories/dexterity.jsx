@@ -1,21 +1,32 @@
-import { useEffect } from "react"
-import { useState } from "react"
-import ReviewCard from "./ReviewCard"
-const Reviews = (props) => {
- const {reviewData, setReviewData} = props
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import ReviewCard from "../../ReviewCard"
 
-let count = 0
+const Dexterity = (props) => {
+    const {reviewData, setReviewData} = props
+    const [categoryReview, setCategoryReview] = useState([])
+const location = useLocation()
+const state = location.state
 
-return(
+const newArr = []
+useEffect(() => {
+reviewData.map((review) => {
+    if(review.category === 'dexterity'){
+        newArr.push(review)
+    }
+    return newArr
+})
+setCategoryReview(newArr)
+},[])
+
+return (
     <div>
-        <h2>Reviews</h2>
-        <ul >
-            {reviewData.map((review)=> {
-                count++
+    <p>{state.description}</p>
+    <ul>
+            {categoryReview.map((review)=> {
                 return(
                     <li className="reviewCard">
                         <ReviewCard
-                        key={count}
                         review_id={review.review_id} 
                         category={review.category} 
                         comment_count={review.comment_count} 
@@ -29,9 +40,9 @@ return(
                     </li>
                 )
             })}
-        </ul>
+           </ul>
     </div>
 )
 }
 
-export default Reviews
+export default Dexterity

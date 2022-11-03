@@ -11,7 +11,7 @@ const ReviewCard = (props) => {
             <p>Posted on: {date.slice(0, 10)}</p>
             <p>Category: {category}</p>
             <p>Designer: {designer}</p>
-            <p>{review_body}</p>
+            <p>{review_body}</p> {/* maybe move this to only show on the review page*/}
             <p>Comments:{comment_count}</p>
             <p>Votes:{votes}</p>
         </div>

@@ -1,16 +1,29 @@
-import { useEffect } from "react"
-import { useState } from "react"
-import ReviewCard from "./ReviewCard"
-const Reviews = (props) => {
- const {reviewData, setReviewData} = props
+import { useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
+import ReviewCard from "../../ReviewCard"
+const RollAndWrite = (props) => {
+    const {reviewData, setReviewData} = props
+    const [categoryReview, setCategoryReview] = useState([])
+const location = useLocation()
+const state = location.state
 
 let count = 0
+const newArr = []
+useEffect(() => {
+reviewData.map((review) => {
+    if(review.category === 'roll-and-write'){
+        newArr.push(review)
+    }
+    return newArr
+})
+setCategoryReview(newArr)
+},[])
 
-return(
+return (
     <div>
-        <h2>Reviews</h2>
-        <ul >
-            {reviewData.map((review)=> {
+    <p>{state.description}</p>
+    <ul>
+            {categoryReview.map((review)=> {
                 count++
                 return(
                     <li className="reviewCard">
@@ -29,9 +42,9 @@ return(
                     </li>
                 )
             })}
-        </ul>
+           </ul>
     </div>
 )
 }
 
-export default Reviews
+export default RollAndWrite
