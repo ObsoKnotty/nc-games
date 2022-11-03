@@ -12,6 +12,8 @@ import PushYourLuck from "./components/Categories/categories/push-your-luck";
 import RollAndWrite from "./components/Categories/categories/roll-and-write";
 import DeckBuilding from "./components/Categories/categories/deck-building";
 import EngineBuilding from "./components/Categories/categories/engine-building";
+import SingleReview from "./components/SingleReview";
+import ReviewList from "./components/reviewList";
 
 function App() {
   const [reviewData, setReviewData] = useState([]);
@@ -31,13 +33,13 @@ function App() {
       <div className="App">
         <Header />
         <nav className="topBar">
-          <Link to="/" class="button">
+          <Link to="/" className="button">
             Home
           </Link>
-          <Link to="/reviews" class="button">
+          <Link to="/reviews" className="button">
             Reviews
           </Link>
-          <Link to="/category" class="button">
+          <Link to="/category" className="button">
             Categories
           </Link>
         </nav>
@@ -48,7 +50,26 @@ function App() {
             element={
               <Reviews reviewData={reviewData} setReviewData={setReviewData} />
             }
-          />
+          >
+            <Route
+              path="list"
+              element={
+                <ReviewList
+                  reviewData={reviewData}
+                  setReviewData={setReviewData}
+                />
+              }
+            />
+            <Route
+              path=":id"
+              element={
+                <SingleReview
+                  reviewData={reviewData}
+                  setReviewData={setReviewData}
+                />
+              }
+            />
+          </Route>
           <Route
             path="/category"
             element={<CategoryList />}
